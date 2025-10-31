@@ -1,6 +1,6 @@
 # My porfolio
 
----
+-
 
 Developed using Next.js Tailwindcss and WebGPU.
 
