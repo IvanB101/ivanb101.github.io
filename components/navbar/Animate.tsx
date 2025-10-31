@@ -16,15 +16,20 @@ export default function Animate() {
     const links = sectionIds.map((id) =>
       document.getElementById(id + "-link"),
     ) as HTMLElement[];
+    const smlinks = sectionIds.map((id) =>
+      document.getElementById(id + "-link-sm"),
+    ) as HTMLElement[];
 
     let newActive = "home";
     let activeLink = links[0];
+    let activeLinkSm = smlinks[0];
 
     function updateActiveLink() {
       for (let i = 0; i < sectionIds.length; i++) {
         if (sections[i].getBoundingClientRect().y <= threshold) {
           newActive = sectionIds[i];
           activeLink = links[i];
+          activeLinkSm = smlinks[i];
         }
       }
       if (newActive === active) {
@@ -36,8 +41,16 @@ export default function Animate() {
           link.classList.remove(activeClass);
         }
       }
+      for (const link of smlinks) {
+        for (const activeClass of activeClasses) {
+          link.classList.remove(activeClass);
+        }
+      }
       for (const activeClass of activeClasses) {
         activeLink.classList.add(activeClass);
+      }
+      for (const activeClass of activeClasses) {
+        activeLinkSm.classList.add(activeClass);
       }
     }
 

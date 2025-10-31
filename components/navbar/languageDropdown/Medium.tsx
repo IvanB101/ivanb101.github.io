@@ -4,6 +4,8 @@ import { SupportedLanguages } from "@/dictionaries";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
+import languageIcon from "@/public/icons/language.svg";
+
 export default function LanguageDropdown({ lang }: { lang: string }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -23,15 +25,15 @@ export default function LanguageDropdown({ lang }: { lang: string }) {
       <button
         onClick={() => setOpen(!open)}
         className={
-          `
-        relative size-7 items-center
-        cursor-pointer
-        mask-[url(/icons/language.svg)]
-        hover:bg-purple-600
-        active:bg-indigo-600
-            ` + (open ? "bg-indigo-600" : "bg-white ")
+          "relative items-center cursor-pointer hover:text-purple-600 active:text-indigo-600" +
+          (open ? " text-indigo-600" : "")
         }
-      ></button>
+      >
+        <div
+          className="size-7"
+          dangerouslySetInnerHTML={{ __html: languageIcon }}
+        />
+      </button>
       {open && (
         <div
           className="
@@ -41,10 +43,16 @@ export default function LanguageDropdown({ lang }: { lang: string }) {
           rounded-xl outline-indigo-600 outline-2
         "
         >
-          <button onClick={() => navigate("en")} className="cursor-pointer ">
+          <button
+            onClick={() => navigate("en")}
+            className="cursor-pointer hover:text-purple-600 active:text-indigo-600"
+          >
             English
           </button>
-          <button onClick={() => navigate("es")} className="cursor-pointer">
+          <button
+            onClick={() => navigate("es")}
+            className="cursor-pointer hover:text-purple-600 active:text-indigo-600"
+          >
             Español
           </button>
         </div>

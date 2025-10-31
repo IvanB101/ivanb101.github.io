@@ -1,12 +1,21 @@
-import { getDictionary, SupportedLanguages } from "@/dictionaries";
+import { Dictionary, SupportedLanguages } from "@/dictionaries";
 import { ReactNode } from "react";
-import LanguageDropdown from "./LanguageDropdown";
+import LanguageDropdown from "./languageDropdown/Medium";
 
-export default async function Navbar({ lang }: { lang: SupportedLanguages }) {
-  const dictionary = await getDictionary(lang);
-  // <Section id="about" label="About" />
+export default async function Medium({
+  lang,
+  dictionary,
+}: {
+  lang: SupportedLanguages;
+  dictionary: Dictionary;
+}) {
   return (
-    <div className="fixed w-full flex backdrop-opacity bg-black/50 justify-between md:justify-end backdrop-blur-md z-10">
+    <div
+      className="
+        fixed w-full flex
+        backdrop-opacity bg-black/50 backdrop-blur-md z-10
+        justify-end not-sm:hidden"
+    >
       <a href="#" id="home-link" className="hidden"></a>
       <Section lang={lang} id="projects">
         {dictionary.sections.projects}
@@ -22,15 +31,15 @@ export default async function Navbar({ lang }: { lang: SupportedLanguages }) {
   );
 }
 
-type SectionProps = {
+function Section({
+  lang,
+  id,
+  children,
+}: {
   lang: SupportedLanguages;
   id: string;
   children: ReactNode;
-};
-
-// TODO: highlight currect section
-// TODO: make responsive
-function Section({ lang, id, children }: SectionProps) {
+}) {
   return (
     <a
       href={`/${lang}#${id}`}

@@ -2,7 +2,7 @@ import { getDictionary, SupportedLanguages } from "@/dictionaries";
 import Section from "./Section";
 
 export default async function Projects({ lang }: { lang: SupportedLanguages }) {
-  const dictionary = await getDictionary(lang);
+  const dictionary = getDictionary(lang);
 
   return (
     <Section id="projects" title={dictionary.sections.projects}>
@@ -43,19 +43,20 @@ export default async function Projects({ lang }: { lang: SupportedLanguages }) {
   );
 }
 
-type DictionaryEntry = {
+function Project({
+  title,
+  entry,
+  tools,
+  lang,
+}: {
   title: string;
-  paragraphs: string[];
-};
-
-type ProjectProps = {
-  title: string;
-  entry: DictionaryEntry;
+  entry: {
+    title: string;
+    paragraphs: string[];
+  };
   tools: string[];
   lang: string;
-};
-
-function Project({ title, entry, tools, lang }: ProjectProps) {
+}) {
   return (
     <a
       href={`/${lang}/projects/${title}`}

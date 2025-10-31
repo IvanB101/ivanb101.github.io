@@ -52,9 +52,7 @@ async function initBg(
     surface.render();
     requestAnimationFrame(() => loop());
   })();
-  (document.getElementById("bg-loader") as HTMLElement).classList.add(
-    "[display:none]",
-  );
+  (document.getElementById("bg-loader") as HTMLElement).classList.add("hidden");
   setState("ready");
 }
 

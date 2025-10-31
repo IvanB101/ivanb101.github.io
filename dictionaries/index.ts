@@ -1,11 +1,33 @@
 import "server-only";
 
-const dictionaries = {
-  en: () => import("@/dictionaries/en").then((module) => module.default),
-  es: () => import("@/dictionaries/es").then((module) => module.default),
+import en from "@/dictionaries/en";
+import es from "@/dictionaries/es";
+
+export type Dictionary = {
+  sections: {
+    projects: string;
+    skills: string;
+    contact: string;
+  };
+  title: string;
+  projects: {
+    [key: string]: {
+      title: string;
+      paragraphs: string[];
+    };
+  };
+  contact: {
+    copyMsg: string;
+  };
+  gallery: string;
 };
 
-export type SupportedLanguages = "en" | "es";
+type Dictionaries = { [key: string]: Dictionary };
 
-export const getDictionary = async (locale: SupportedLanguages) =>
-  dictionaries[locale]();
+const dictionaries: Dictionaries = { en, es } as unknown as Dictionaries;
+
+export type SupportedLanguages = "en" | "es";
+export const supportedLanguages = ["en", "es"];
+
+export const getDictionary = (locale: SupportedLanguages) =>
+  dictionaries[locale];
