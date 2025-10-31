@@ -8,7 +8,7 @@ export default function RootLayout() {
     const userLang = (navigator.language || "en").split("-")[0];
     const supported = ["en", "es"];
     const lang = supported.includes(userLang) ? userLang : "en";
-    window.location.replace("/" + lang + "/");
+    window.location.replace("/" + lang);
   });
 
   return <Loader />;
